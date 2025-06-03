@@ -23,6 +23,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddHttpClient<ClaudeApiService>();
 builder.Services.AddScoped<TransformationService>();
+builder.Services.AddScoped<IMCPService, MCPService>();
 builder.Services.AddScoped<IOpenAIEndpointsHandler, OpenAIEndpointsHandler>();
 builder.Services.AddSingleton<IServiceUrlProvider, AspireServiceUrlProvider>();
 builder.Services.AddLogging();

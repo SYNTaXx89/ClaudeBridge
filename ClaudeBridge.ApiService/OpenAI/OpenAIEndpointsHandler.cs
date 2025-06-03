@@ -6,17 +6,19 @@ public class OpenAIEndpointsHandler : IOpenAIEndpointsHandler
     private readonly TransformationService _transformationService;
     private readonly ClaudeApiService _claudeApiService;
     private readonly ILogger<OpenAIEndpointsHandler> _logger;
+    private readonly IMCPService _mcpService;
 
-    public OpenAIEndpointsHandler(TransformationService transformationService, ClaudeApiService claudeApiService, ILogger<OpenAIEndpointsHandler> logger)
+    public OpenAIEndpointsHandler(TransformationService transformationService, ClaudeApiService claudeApiService, ILogger<OpenAIEndpointsHandler> logger, IMCPService mcpService)
     {
         _transformationService = transformationService;
         _claudeApiService = claudeApiService;
         _logger = logger;
+        _mcpService = mcpService;
     }
 
     private ClaudeRequest TransformRequest(ChatCompletionRequest request)
     {
-        var claudeRequest = _transformationService.TransformRequest(request);
+        var claudeRequest = _transformationService.TransformRequest(request, _mcpService.GetMcpServers());
         _logger.LogInformation("Transformed request for model: {Model}", claudeRequest.Model);
 
         return claudeRequest;
