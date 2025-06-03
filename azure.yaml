@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: claude-bridge
+services:  
+  app:
+    language: dotnet
+    project: ./ClaudeBridge.AppHost/ClaudeBridge.AppHost.csproj
+    host: containerapp
